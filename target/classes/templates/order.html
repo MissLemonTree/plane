@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" xmlns:th="http://www.w3.org/1999/xhtml">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" />
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+</head>
+<body>
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">卖飞机啊</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>航班查询</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="idea icon"></i>订单信息</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>个人中心</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img class="ui avatar image" src="" style="height: 50px" />
+                        王一晨
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+<div class="ui container">
+    <div class="m-container-small m-padded-tb-large">
+        <div class="ui container">
+            <table id="roles_table" class="ui celled table">
+                <thead style="text-align: center">
+                <tr>
+                    <th style="width: 70%">个人订单</th>
+                    <th style="width: 30%">名称</th>
+                </tr>
+                </thead>
+                <tbody id="tableBody" >
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th id="page" colspan="2">
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+
+    var layer = layui.layer;
+    
+    $(document).ready(function () {
+        getData(1,1);
+    })
+    
+    function getData(pageNum,id) {
+        $.ajax({
+            url:"/order/getData?user_id="+id,
+            type:"get",
+            success:function (result) {
+                console.log(result)
+                var orderList=result.data.list
+                var inf='';
+                var tf='';
+                for (var i=0;i<orderList.length;i++){
+                    v = orderList[i];
+                    inf += "<tr><td>"+
+                            "<div class='ui list'>"+
+                                "<div class='item'>姓名:"+v.username+"</div>"+
+                                "<div class='item'>身份证号:"+v.idNumber+"</div>"+
+                                "<div class='item'>电话号码:"+v.phoneNum+"</div>"+
+                                "<div class='item'>航班号:"+v.flightNum+"</div>"+
+                                "<div class='item'>航线:"+v.origin+"-----"+v.destination+"</div>"+
+                                "<div class='item'>时间:"+v.startTime+"-----"+v.arrivalTime+"</div>"+
+                                "<div class='item'>金额:"+v.price+"元"+"</div>"+
+                            "</div>"+
+                            "</td>"+
+                            "<td><button class='ui teal button'>删除订单</button>"+
+                            "</td>"
+                }
+                tf +=
+                    "<button id='pre' class='ui black basic button' onclick='getData("+(pageNum-1)+")'>上一页</button>"+
+                    "<button id='next' class='ui black basic button' onclick='getData("+(pageNum+1)+")'>下一页</button>";
+                $('#tableBody').html(inf);
+                $('#page').html(tf);
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

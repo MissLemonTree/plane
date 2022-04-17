@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>乘机信息</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" />
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+</head>
+<body>
+
+<br>
+<br>
+<br>
+
+<div class="window">
+    <div class="m-container-small m-padded-tb-large">
+        <div class="ui container">
+            <div class="ui form" >
+                <div class="field">
+                    <label>航班号</label>
+                    <input type="text" th:value="${flight.flightNum}" placeholder="航班号">
+                    <input type="hidden" id="flight_id" name="flight_id" th:value="${flight.id}">
+                </div>
+                <div class="field">
+                    <label>姓名</label>
+                    <input type="text" id="name" name="name" placeholder="姓名">
+                </div>
+                <br>
+                <div class="field">
+                    <label>身份证号</label>
+                    <input type="text" id="idNumber" name="idNumber" placeholder="身份证号">
+                </div>
+                <br>
+                <div class="field">
+                    <label>手机号码</label>
+                    <input type="text" id="phoneNum" name="phoneNum" placeholder="手机号码">
+                </div>
+                <br>
+                <div id="Orcode_div" style="height: 165px;width: 165px;"></div>
+
+                <div class="ui right aligned container">
+                    <button class="ui teal button" onclick="closeThis()">返回</button>
+                    <button class="ui teal button" onclick="pay()">提交</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+<script>
+    $('.ui.radio.checkbox')
+        .checkbox()
+    ;
+
+    function closeThis(){
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+        parent.getData(1);
+    }
+
+    // function addOrder(){
+    //     $.ajax({
+    //         url:"/order/addOrder",
+    //         data:{
+    //             "flight_id":$('#flight_id').val(),
+    //             "name":$('#name').val(),
+    //             "sex":$('#sex').val(),
+    //             "idNumber":$('#idNumber').val(),
+    //             "phoneNum":$('#phoneNum').val()
+    //         } ,
+    //         type:"post",
+    //         success:function (result){
+    //             console.log(result);
+    //             if(result.data==1){
+    //                 layer.msg("添加成功",{icon:1,time:1000,
+    //                     end:function () {
+    //                         closeThis();
+    //                     }
+    //                 });
+    //
+    //             }else {
+    //                 layer.msg(result.msg);
+    //             }
+    //         }
+    //     })
+    // }
+
+    var outTradeNo;
+    function pay(){
+        $.ajax({
+            url:"/AlipayFaceToFaceController/ZFBPreorderAction",
+            type:"post",
+            async:false,
+            dataType:"JSON",
+            success:function (res){
+                outTradeNo = res.outTradeNo;
+                createQrcode(res.qrcode);
+            }
+        })
+    }
+
+    var zfbQRCode;
+    //生成付款二维码
+    function createQrcode(url){
+        if (zfbQRCode!=undefined && zfbQRCode!='') {
+            //清空之前的二维码
+            $("#Orcode_div canvas").remove()
+            $("#yes_qrcode").hide();
+        }
+        //生成二维码放入”Orcode_div“ div
+        zfbQRCode=$('#Orcode_div').qrcode({
+            width: 168, //宽度
+            height: 168, //高度
+            text:url
+        });
+    }
+
+</script>
+</body>
+</html>
