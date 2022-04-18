@@ -18,6 +18,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginHandler())
                 .addPathPatterns("/order/orderList")
+                .addPathPatterns("/flight/toBook")
                 .excludePathPatterns("/AlipayFaceToFaceController/ZFBcallback")
                 .excludePathPatterns("/flight/index")
                 .excludePathPatterns("/flight/login")
