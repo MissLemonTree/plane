@@ -16,6 +16,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
         registry.addInterceptor(new LoginHandler())
                 .addPathPatterns("/order/orderList")
                 .addPathPatterns("/flight/toBook")
