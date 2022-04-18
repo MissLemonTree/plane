@@ -8,13 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @ClassName FlightServiceImpl
- * @Description TODO
- * @Author wangyichen
- * Date 2022/4/6 19:09
- * Version 1.0
- */
+
 @Service
 public class FlightServiceImpl implements FlightService {
 

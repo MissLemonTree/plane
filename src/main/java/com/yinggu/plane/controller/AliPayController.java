@@ -17,13 +17,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * @ClassName AliPayController
- * @Description TODO
- * @Author wangyichen
- * Date 2022/4/12 9:07
- * Version 1.0
- */
 @Controller
 @RequestMapping("/AlipayFaceToFaceController")
 public class AliPayController {

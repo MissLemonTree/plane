@@ -8,25 +8,16 @@ import com.yinggu.plane.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.xml.crypto.Data;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
-/**
- * @ClassName FlightController
- * @Description TODO
- * @Author wangyichen
- * Date 2022/4/6 19:10
- * Version 1.0
- */
+import java.util.List;
+
+
+
 @Controller
 @RequestMapping("/flight")
 public class FlightController {

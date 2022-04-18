@@ -19,13 +19,6 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @ClassName OrderController
- * @Description TODO
- * @Author wangyichen
- * Date 2022/4/6 19:10
- * Version 1.0
- */
 @Controller
 @RequestMapping("/order")
 public class OrderController {

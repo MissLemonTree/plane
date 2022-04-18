@@ -4,13 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @ClassName Order
- * @Description TODO
- * @Author wangyichen
- * Date 2022/4/6 16:41
- * Version 1.0
- */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

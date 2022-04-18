@@ -7,13 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * @ClassName ZFBFaceToFaceModel
- * @Description TODO
- * @Author wangyichen
- * Date 2022/4/12 9:23
- * Version 1.0
- */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

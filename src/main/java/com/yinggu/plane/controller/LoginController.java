@@ -7,18 +7,12 @@ import com.yinggu.plane.pojo.vo.LoginVo;
 import com.yinggu.plane.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
-/**
- * @ClassName LoginController
- * @Description TODO
- * @Author wangyichen
- * Date 2022/4/6 19:10
- * Version 1.0
- */
 @Controller
 @RequestMapping("/flight")
 public class LoginController {
@@ -49,6 +43,17 @@ public class LoginController {
             return Result.fail("登陆失败，您还没有注册");
         }
 
+    }
+
+    @RequestMapping("/getUser")
+    @ResponseBody
+    public Result getUser(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if(user != null){
+            return Result.success(user.getNickname());
+        }else {
+            return Result.success("请登录");
+        }
     }
 
     @RequestMapping("/phone/index")
@@ -89,6 +94,13 @@ public class LoginController {
         }else {
             return Result.fail("验证码不能为空");
         }
+    }
+
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/flight/index";
     }
 
 

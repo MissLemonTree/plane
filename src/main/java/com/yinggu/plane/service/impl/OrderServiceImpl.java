@@ -10,13 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @ClassName OrderServiceImpl
- * @Description TODO
- * @Author wangyichen
- * Date 2022/4/6 19:09
- * Version 1.0
- */
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
